@@ -1,0 +1,20 @@
+@import "./_variables.scss";
+
+$hover-color: darken($primary-color, 10%);
+$border-color: #333c44; // Move this to _variables.scss if it's used elsewhere
+
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 1rem 2rem;
+	border-bottom: 1px solid $border-color;
+
+	&__logo a {
+		color: $secondary-color;
+		font-size: 1.2rem;
+		font-weight: bold;
+		text-decoration: none;
+	}
+}

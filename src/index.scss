@@ -1,0 +1,80 @@
+@import "./styles/_variables.scss";
+
+:root {
+	font-family: $font-family;
+	line-height: $line-height;
+	font-weight: $font-weight-regular;
+
+	color-scheme: light dark;
+	color: $secondary-color;
+	background-color: $background-color-dark;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.maxWidth {
+	max-width: 1200px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+hr {
+	border: 1px solid $border-color;
+	margin: 1rem 0;
+}
+
+a {
+	font-weight: $font-weight-medium;
+	color: $primary-color;
+	text-decoration: inherit;
+}
+
+button {
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: $font-weight-medium;
+	font-family: inherit;
+	background-color: $button-bg-color-dark;
+	cursor: pointer;
+	transition: border-color 0.25s;
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+
+	&:hover:enabled {
+		background-color: $button-bg-color-hover;
+	}
+
+	&:focus,
+	&:focus-visible {
+		outline: 4px auto $focus-outline-color;
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: $background-color-light;
+	}
+
+	a:hover {
+		color: lighten($primary-color, 10%);
+	}
+
+	button {
+		background-color: $button-bg-color-light;
+	}
+}
