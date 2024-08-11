@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import '../styles/Uploader.scss';
-import { BANK_LIST } from '../utils/constants';
+
 import { sendPostRequest } from '../repository/apiHandler';
 import { PDF_TO_CSV_URL } from '../utils/urls';
 
+import '../styles/Uploader.scss';
+
 interface UploaderProps {
-	loading: boolean;
-	setLoading: (loading: boolean) => void;
+	allowedBanks: any[];
 	setApiResponse: (response: any) => void;
 }
 
-const Uploader: React.FC<UploaderProps> = ({ loading, setLoading, setApiResponse }) => {
+const Uploader: React.FC<UploaderProps> = ({ allowedBanks, setApiResponse }) => {
 	const [selectedBank, setSelectedBank] = useState<string>('');
+	const [loading, setLoading] = useState<boolean>(false);
 	const [file, setFile] = useState<File | null>(null);
 	const [error, setError] = useState<string | null>(null);
 
@@ -43,9 +44,11 @@ const Uploader: React.FC<UploaderProps> = ({ loading, setLoading, setApiResponse
 	const handleSubmit = async () => {
 		if (file && selectedBank) {
 			setLoading(true);
+			setError(null);
+			setApiResponse(null);
 
 			// Perform upload or other actions here
-			console.log('Uploading:', { file, selectedBank });
+			// console.log('Uploading:', { file, selectedBank });
 
 			const data = new FormData();
 			data.append("bank_name", selectedBank);
@@ -53,11 +56,11 @@ const Uploader: React.FC<UploaderProps> = ({ loading, setLoading, setApiResponse
 
 			try {
 				const response = await sendPostRequest(PDF_TO_CSV_URL, data);
-				console.log('Response:', response);
+				// console.log('Response:', response);
 				setApiResponse(response.data);
-				setLoading(false);
-			} catch (error) {
-				console.error('Error:', error);
+			} catch (error: any) {
+				setError('Error: ' + (error.response?.data?.message || 'An unknown error occurred.'));
+			} finally {
 				setLoading(false);
 			}
 		} else {
@@ -72,8 +75,15 @@ const Uploader: React.FC<UploaderProps> = ({ loading, setLoading, setApiResponse
 				onDrop={handleFileDrop}
 				onDragOver={(event) => event.preventDefault()}
 			>
-				<p>Drag and drop a PDF file here, or click to select a file.</p>
-				<input type="file" accept=".pdf" onChange={handleFileChange} />
+				<label htmlFor="fileInput">
+					<p>Drag and drop a PDF file here, or click to select a file.</p>
+					<input
+						id="fileInput"
+						type="file"
+						accept=".pdf"
+						onChange={handleFileChange}
+					/>
+				</label>
 			</div>
 
 			{file && <p className="uploader__file">Selected file: {file.name}</p>}
@@ -85,7 +95,7 @@ const Uploader: React.FC<UploaderProps> = ({ loading, setLoading, setApiResponse
 					<option value="" disabled>
 						-- Select a Bank --
 					</option>
-					{BANK_LIST.map((bank) => (
+					{allowedBanks.map((bank) => (
 						<option key={bank.value} value={bank.value}>
 							{bank.name}
 						</option>
@@ -93,9 +103,11 @@ const Uploader: React.FC<UploaderProps> = ({ loading, setLoading, setApiResponse
 				</select>
 			</div>
 
-			<button onClick={handleSubmit} disabled={!file || !selectedBank || loading}>
-				{loading ? 'Loading...' : 'Upload'}
-			</button>
+			<div className='uploader__actions'>
+				<button onClick={handleSubmit} disabled={!file || !selectedBank || loading}>
+					{loading ? 'Loading...' : 'Upload'}
+				</button>
+			</div>
 		</div>
 	);
 };

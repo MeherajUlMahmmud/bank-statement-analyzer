@@ -3,10 +3,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 1rem;
 	padding: 1rem;
 	border-radius: 8px;
-	background-color: #f4f4f4;
+	background-color: #333c44;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
 	@media screen and (max-width: 600px) {
 		width: 100%;
@@ -14,16 +14,17 @@
 
 	&__dropzone {
 		width: 100%;
-		padding: 2rem;
 		text-align: center;
 		cursor: pointer;
-		background-color: #ffffff;
 		border: 2px dashed #646cff;
 		border-radius: 8px;
-		transition: background-color 0.3s ease;
 
-		&:hover {
-			background-color: #e8e8ff;
+		label {
+			width: 100%;
+			height: 100%;
+			display: block;
+			padding: 2rem;
+			cursor: pointer;
 		}
 
 		input {
@@ -34,7 +35,6 @@
 	&__file {
 		margin: 1rem 0;
 		font-size: 1rem;
-		color: #333;
 	}
 
 	&__error {
@@ -48,7 +48,6 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 
 		label {
 			margin-bottom: 0.5rem;
@@ -63,5 +62,12 @@
 			border-radius: 4px;
 			background-color: #333c44;
 		}
+	}
+
+	&__actions {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
 	}
 }

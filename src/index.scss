@@ -1,13 +1,10 @@
-@import "./styles/_variables.scss";
-
 :root {
-	font-family: $font-family;
-	line-height: $line-height;
-	font-weight: $font-weight-regular;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
 
 	color-scheme: light dark;
-	color: $secondary-color;
-	background-color: $background-color-dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #242424;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -17,25 +14,26 @@
 
 * {
 	box-sizing: border-box;
+}
+
+body {
 	margin: 0;
 	padding: 0;
 }
 
 .maxWidth {
-	max-width: 1200px;
+	max-width: 1280px;
 	margin: 0 auto;
 	width: 100%;
 }
 
 hr {
-	border: 1px solid $border-color;
+	border: 1px solid #333c44;
 	margin: 1rem 0;
 }
 
 a {
-	font-weight: $font-weight-medium;
-	color: $primary-color;
-	text-decoration: inherit;
+	color: inherit;
 }
 
 button {
@@ -43,9 +41,7 @@ button {
 	border: 1px solid transparent;
 	padding: 0.6em 1.2em;
 	font-size: 1em;
-	font-weight: $font-weight-medium;
-	font-family: inherit;
-	background-color: $button-bg-color-dark;
+	background-color: #1a1a1a;
 	cursor: pointer;
 	transition: border-color 0.25s;
 
@@ -55,26 +51,6 @@ button {
 	}
 
 	&:hover:enabled {
-		background-color: $button-bg-color-hover;
-	}
-
-	&:focus,
-	&:focus-visible {
-		outline: 4px auto $focus-outline-color;
-	}
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: $background-color-light;
-	}
-
-	a:hover {
-		color: lighten($primary-color, 10%);
-	}
-
-	button {
-		background-color: $button-bg-color-light;
+		background-color: #2a2a2a;
 	}
 }

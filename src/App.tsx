@@ -2,8 +2,8 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { ErrorBoundary } from './components/ErrorBoundary';
-import Loading from './components/Loading';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 // Lazy-loaded pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -13,11 +13,12 @@ const App: React.FC = () => {
     <ErrorBoundary>
       <Router>
         <Navbar />
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<p>Loading...</p>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
           </Routes>
         </Suspense>
+        <Footer />
       </Router>
     </ErrorBoundary>
   );

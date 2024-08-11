@@ -1,24 +1,64 @@
-import { useState } from "react";
-import Uploader from "../components/Uploader";
+import { useEffect, useState } from "react";
+
+import { sendGetRequest } from "../repository/apiHandler";
+import { ALLOWED_BANKS_URL } from "../utils/urls";
+
 import "../styles/HomePage.scss";
 
+import Uploader from "../components/Uploader";
+
 const HomePage = () => {
-	const [loading, setLoading] = useState<boolean>(false);
+	const [allowedBanks, setAllowedBanks] = useState<any[]>([]);
+	const [loading, setLoading] = useState<boolean>(true);
 	const [apiResponse, setApiResponse] = useState<any | null>(null);
+
+	useEffect(() => {
+		fetchAllowedBankList();
+	}, []);
+
+	const fetchAllowedBankList = async () => {
+		const response = await sendGetRequest(ALLOWED_BANKS_URL);
+		// console.log(response.data);
+		setAllowedBanks(response.data.data);
+		setLoading(false);
+	};
 
 	return (
 		<div className="maxWidth homePageContainer">
-			<Uploader
-				loading={loading}
-				setLoading={setLoading}
-				setApiResponse={setApiResponse}
-			/>
 			{
-				apiResponse &&
-				<div className="apiResponseContainer">
-					<h2>API Response:</h2>
-					<pre>{JSON.stringify(apiResponse, null, 2)}</pre>
-				</div>
+				loading ? (
+					<div className="loadingContainer">
+						<i className="fa fa-spinner fa-spin"></i>
+					</div>
+				) : (
+					<Uploader
+						allowedBanks={allowedBanks}
+						setApiResponse={setApiResponse}
+					/>
+				)
+			}
+			{
+				apiResponse && (
+					apiResponse.is_success ? (
+						<div className="apiResponseContainer">
+							<p className="success">
+								{apiResponse.message}
+							</p>
+							<div className="apiResponseContainer__download">
+								<i className="fa fa-download"></i>
+								<a href={apiResponse.data.csv_file} download>
+									Download CSV file
+								</a>
+							</div>
+						</div>
+					) : (
+						<div className="apiResponseContainer">
+							<p className="error">
+								{apiResponse.message}
+							</p>
+						</div>
+					)
+				)
 			}
 		</div>
 	)
