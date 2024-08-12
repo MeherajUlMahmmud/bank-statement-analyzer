@@ -4,6 +4,7 @@ import { sendPostRequest } from '../repository/apiHandler';
 import { PDF_TO_CSV_URL } from '../utils/urls';
 
 import '../styles/Uploader.scss';
+import { IMAGES } from '../utils/assets';
 
 interface UploaderProps {
 	allowedBanks: any[];
@@ -86,7 +87,16 @@ const Uploader: React.FC<UploaderProps> = ({ allowedBanks, setApiResponse }) => 
 				</label>
 			</div>
 
-			{file && <p className="uploader__file">Selected file: {file.name}</p>}
+			{/* {file && <p className="uploader__file">Selected file: {file.name}</p>} */}
+			{file && <div className="uploader__file">
+				<div className="uploader__file__preview">
+					<div className='close_icon'>
+						<i className="fa fa-times" onClick={() => setFile(null)}></i>
+					</div>
+					<img src={IMAGES.PDF_ICON} alt="PDF icon" />
+					<p>{file.name}</p>
+				</div>
+			</div>}
 			{error && <p className="uploader__error">{error}</p>}
 
 			<div className="uploader__bank-select">

@@ -10,6 +10,7 @@ import Uploader from "../components/Uploader";
 const HomePage = () => {
 	const [allowedBanks, setAllowedBanks] = useState<any[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [error, setError] = useState<string | null>(null);
 	const [apiResponse, setApiResponse] = useState<any | null>(null);
 
 	useEffect(() => {
@@ -17,10 +18,15 @@ const HomePage = () => {
 	}, []);
 
 	const fetchAllowedBankList = async () => {
-		const response = await sendGetRequest(ALLOWED_BANKS_URL);
-		// console.log(response.data);
-		setAllowedBanks(response.data.data);
-		setLoading(false);
+		try {
+			const response = await sendGetRequest(ALLOWED_BANKS_URL);
+			// console.log(response.data);
+			setAllowedBanks(response.data.data);
+			setLoading(false);
+		} catch (error: any) {
+			setError(error.message ?? "Something went wrong");
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -29,6 +35,12 @@ const HomePage = () => {
 				loading ? (
 					<div className="loadingContainer">
 						<i className="fa fa-spinner fa-spin"></i>
+					</div>
+				) : error ? (
+					<div className="errorContainer">
+						<p className="error">
+							{error}
+						</p>
 					</div>
 				) : (
 					<Uploader

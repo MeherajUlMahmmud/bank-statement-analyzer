@@ -16,7 +16,7 @@
 		padding: 20px;
 		border: 1px solid #333c44;
 		border-radius: 8px;
-		background-color: #f4f4f4;
+		background-color: #bbf7d0;
 
 		@media screen and (max-width: 600px) {
 			width: 100%;
@@ -31,7 +31,7 @@
 			justify-content: center;
 			margin-top: 20px;
 			color: #fff;
-			background-color: green;
+			background-color: #166534;
 
 			i {
 				margin-right: 5px;
@@ -50,7 +50,7 @@
 			text-align: center;
 
 			&.success {
-				color: green;
+				color: #166534;
 			}
 
 			&.error {
