@@ -74,7 +74,7 @@ const Uploader: React.FC<UploaderProps> = ({ allowedBanks, setApiResponse }) => 
 			<div
 				className="uploader__dropzone"
 				onDrop={handleFileDrop}
-				onDragOver={(event) => event.preventDefault()}
+				onDragOver={(e) => e.preventDefault()}
 			>
 				<label htmlFor="fileInput">
 					<p>Drag and drop a PDF file here, or click to select a file.</p>
