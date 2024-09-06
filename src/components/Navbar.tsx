@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Navbar.scss";
-import { homeRoute } from "../utils/app_routes";
+import AppRoutes from "../utils/app_routes";
 import { appName } from "../utils/constants";
 import { Link } from "react-router-dom";
 
@@ -8,19 +8,20 @@ const Navbar: React.FC = () => {
   const navMenu = [
     {
       name: "Home",
-      route: "/",
+      route: AppRoutes.homeRoute,
     },
     {
       name: "Use Cases",
-      route: "/use-cases",
+      route: AppRoutes.useCaseRoute,
     },
     {
       name: "Features",
-      route: "/features",
+      route: AppRoutes.featuresRoute,
     },
     {
-      name: "Team",
-      route: "/team",
+      name: "Get Started",
+      route: AppRoutes.signInRoute,
+      special: true,
     },
   ];
 
@@ -32,7 +33,8 @@ const Navbar: React.FC = () => {
             <Link
               to={item.route}
               key={index}
-              className="navbar__menuContainer__menuItem"
+              className={`navbar__menuContainer__menuItem ${item.special ? "navbar__menuContainer__menuItem--special" : ""
+                }`}
             >
               {item.name}
             </Link>
