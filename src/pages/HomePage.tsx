@@ -30,7 +30,7 @@ const HomePage = () => {
 	};
 
 	return (
-		<div className="maxWidth homePageContainer">
+		<div className="maxWidth homePageContainer ">
 			{
 				loading ? (
 					<div className="loadingContainer">

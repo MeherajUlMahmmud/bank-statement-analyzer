@@ -97,11 +97,13 @@ const Uploader: React.FC<UploaderProps> = ({ allowedBanks, setApiResponse }) => 
 					<p>{file.name}</p>
 				</div>
 			</div>}
-			{error && <p className="uploader__error">{error}</p>}
+			{error && <p className="text-red-500 text-sm">{error}</p>}
 
-			<div className="uploader__bank-select">
-				<label htmlFor="bank">Select Bank:</label>
-				<select id="bank" value={selectedBank} onChange={handleBankChange}>
+			<div className="flex flex-col w-full m-4">
+				<label className='w-full text-sm font-normal' htmlFor="bank">
+					Select a bank:
+				</label>
+				<select className='w-full p-2 text-md border-2 border-gray-700 bg-gray-800 rounded-md' onChange={handleBankChange} value={selectedBank}>
 					<option value="" disabled>
 						-- Select a Bank --
 					</option>
@@ -113,8 +115,8 @@ const Uploader: React.FC<UploaderProps> = ({ allowedBanks, setApiResponse }) => 
 				</select>
 			</div>
 
-			<div className='uploader__actions'>
-				<button onClick={handleSubmit} disabled={!file || !selectedBank || loading}>
+			<div className='flex justify-center items-center '>
+				<button className='bg-gray-900 cursor-pointer px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50 rounded-md' onClick={handleSubmit} disabled={!file || !selectedBank || loading}>
 					{loading ? 'Loading...' : 'Upload'}
 				</button>
 			</div>

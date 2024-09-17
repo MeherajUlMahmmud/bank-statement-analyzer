@@ -1,10 +1,9 @@
 import React from 'react';
-import '../styles/Footer.scss';
 
 const Footer: React.FC = () => {
 	return (
-		<footer className="footer">
-			<div className="footer__content">
+		<footer className="flex justify-center items-center w-full h-16 bg-gray-800 px-4 py-2 shadow-md">
+			<div className="flex items-center justify-center w-full h-full">
 				<p>&copy; {new Date().getFullYear()} Dutch-bangla Bank PLC. All rights reserved.</p>
 			</div>
 		</footer>

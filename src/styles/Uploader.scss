@@ -83,38 +83,4 @@
 			border-color: #646cff;
 		}
 	}
-
-	&__error {
-		color: red;
-		font-size: 0.9rem;
-		margin-top: 0.5rem;
-	}
-
-	&__bank-select {
-		margin: 1rem 0;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-
-		label {
-			margin-bottom: 0.5rem;
-			font-size: 1rem;
-		}
-
-		select {
-			width: 100%;
-			padding: 0.5rem;
-			font-size: 1rem;
-			outline: none;
-			border-radius: 4px;
-			background-color: #333c44;
-		}
-	}
-
-	&__actions {
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		gap: 1rem;
-	}
 }
