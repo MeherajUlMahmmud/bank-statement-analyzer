@@ -33,7 +33,7 @@ interface ApiResponse {
 	json_data: JsonData;
 }
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 export default function FileUpload() {
 	const [banks, setBanks] = useState<Bank[]>([])
@@ -42,7 +42,6 @@ export default function FileUpload() {
 	const [isUploading, setIsUploading] = useState(false)
 	const [response, setResponse] = useState<ApiResponse | null>(null)
 
-	const [pdfPreviewUrl, setPdfPreviewUrl] = useState<string | ArrayBuffer | null>(null)
 	const [csvData, setCsvData] = useState<string[][]>([])
 	const [numPages, setNumPages] = useState<number | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
@@ -275,6 +274,7 @@ export default function FileUpload() {
 								<div className="rounded-lg overflow-hidden">
 									<Document
 										file={response.file_urls.pdf_file}
+										// file="http://localhost:8000/static/uploads/20241030/20241030_182105_City_1_1/City_1_1.pdf"
 										onLoadSuccess={onDocumentLoadSuccess}
 										onLoadError={(error) => {
 											console.error('Error loading PDF:', error);
@@ -286,7 +286,7 @@ export default function FileUpload() {
 										}}
 									>
 										{Array.from(new Array(numPages), (el, index) => (
-											<Page key={`page_${index + 1}`} pageNumber={index + 1} width={450} />
+											<Page key={`page_${index + 1}`} pageNumber={index + 1} width={600} />
 										))}
 									</Document>
 								</div>
