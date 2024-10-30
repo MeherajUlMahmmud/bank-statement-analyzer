@@ -3,7 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { statementRepository } from '@/repository/api'
+import { statementRepository } from '@/repository/statement'
 import { toast } from '@/hooks/use-toast'
 import { FileText, Upload, ChevronRight, Download, Loader2 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -45,14 +45,14 @@ export default function FileUpload() {
 	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
+		loadBanks()
+	}, [])
+
+	useEffect(() => {
 		if (response) {
 			loadCsvData()
 		}
 	}, [response])
-
-	useEffect(() => {
-		loadBanks()
-	}, [])
 
 	const loadBanks = async () => {
 		try {
@@ -67,6 +67,25 @@ export default function FileUpload() {
 			})
 		}
 	}
+
+	const handleFileDrop = (event: React.DragEvent<HTMLDivElement>) => {
+		event.preventDefault();
+		const droppedFile = event.dataTransfer.files[0];
+		handleFile(droppedFile);
+	};
+
+	const handleFile = (file: File | null) => {
+		if (file && file.type === 'application/pdf') {
+			setFile(file);
+		} else {
+			setFile(null);
+			toast({
+				title: "Error",
+				description: "Only PDF files are allowed.",
+				variant: "destructive",
+			})
+		}
+	};
 
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {
@@ -153,7 +172,7 @@ export default function FileUpload() {
 	};
 
 	return (
-		<div className="min-h-screen flex flex-col justify-center items-center p-4 space-y-4">
+		<div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex flex-col justify-center items-center p-4 space-y-4">
 			<div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
 				<div className="md:flex">
 					<div className="md:w-1/2 bg-primary-600 p-8 text-white">
@@ -188,7 +207,7 @@ export default function FileUpload() {
 										<SelectValue placeholder="Choose a bank" />
 									</SelectTrigger>
 									<SelectContent className="bg-white">
-										{banks.map((bank) => (
+										{banks && banks.map((bank) => (
 											<SelectItem key={bank.value} value={bank.value}>
 												{bank.name}
 											</SelectItem>
@@ -201,8 +220,15 @@ export default function FileUpload() {
 								<div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
 									<div className="space-y-1 text-center">
 										<FileText className="mx-auto h-12 w-12 text-gray-400" />
-										<div className="flex text-sm text-gray-600">
-											<label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-primary-600 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500">
+										<div
+											className="flex text-sm text-gray-600"
+											onDrop={handleFileDrop}
+											onDragOver={(e) => e.preventDefault()}
+										>
+											<label
+												htmlFor="file-upload"
+												className="relative cursor-pointer bg-white rounded-md font-medium text-primary-600 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500"
+											>
 												<span>Upload a file</span>
 												<Input
 													id="file-upload"

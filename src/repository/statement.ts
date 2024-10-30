@@ -7,11 +7,7 @@ export const statementRepository = {
 		formData.append("pdf_file", file);
 		formData.append("bank_name", bankId);
 
-		const response = await sendPostRequest(
-			"/pdf-to-csv/convert",
-			formData,
-			true
-		);
+		const response = await sendPostRequest("/pdf-to-csv/convert", formData);
 
 		return response.data;
 	},
