@@ -26,7 +26,10 @@ interface JsonData {
 }
 
 interface ApiResponse {
-	csv_file: string;
+	file_urls: {
+		csv_file: string;
+		pdf_file: string;
+	};
 	json_data: JsonData;
 }
 
@@ -109,16 +112,6 @@ export default function FileUpload() {
 			const response = await statementRepository.uploadPdf(file, selectedBank);
 			console.log(response);
 			setResponse(response.data)
-
-			const reader = new FileReader();
-			reader.onloadend = () => {
-				setPdfPreviewUrl(reader.result);
-			};
-			reader.readAsDataURL(file);
-
-			// Reset form fields after upload
-			setFile(null);
-			setSelectedBank('');
 		} catch (error) {
 			console.error('Error uploading file:', error)
 			toast({
@@ -132,11 +125,11 @@ export default function FileUpload() {
 	}
 
 	const loadCsvData = async () => {
-		if (!response || !response.csv_file) return; // Prevent fetching if response is null or csv_file is missing
+		if (!response || !response.file_urls.csv_file) return; // Prevent fetching if response is null or csv_file is missing
 
 		setIsLoading(true)
 		try {
-			const data = await statementRepository.fetchCsvData(response.csv_file)
+			const data = await statementRepository.fetchCsvData(response.file_urls.csv_file)
 			setCsvData(data)
 		} catch (error) {
 			console.error('Error fetching CSV data:', error)
@@ -281,7 +274,7 @@ export default function FileUpload() {
 							<CardContent>
 								<div className="rounded-lg overflow-hidden">
 									<Document
-										file={pdfPreviewUrl}
+										file={response.file_urls.pdf_file}
 										onLoadSuccess={onDocumentLoadSuccess}
 										onLoadError={(error) => {
 											console.error('Error loading PDF:', error);
