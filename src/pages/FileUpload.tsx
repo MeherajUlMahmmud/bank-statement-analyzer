@@ -274,7 +274,6 @@ export default function FileUpload() {
 								<div className="rounded-lg overflow-hidden">
 									<Document
 										file={response.file_urls.pdf_file}
-										// file="http://localhost:8000/static/uploads/20241030/20241030_182105_City_1_1/City_1_1.pdf"
 										onLoadSuccess={onDocumentLoadSuccess}
 										onLoadError={(error) => {
 											console.error('Error loading PDF:', error);

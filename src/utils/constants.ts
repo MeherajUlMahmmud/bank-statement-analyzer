@@ -30,6 +30,9 @@ export class AppUrls {
 	static homeRoute = "/";
 	static fileUploadRoute = "/upload";
 
+	static aboutRoute = "/about-us";
+	static contactRoute = "/contact-us";
+
 	static errorRoute = "/error";
 }
 
