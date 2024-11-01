@@ -1,50 +1,93 @@
-# React + TypeScript + Vite
+# Bank Statement Analyzer - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the Bank Statement Analyzer, a web-based tool that allows users to upload and analyze their bank statements in a streamlined and user-friendly interface. Built with modern technologies like **React**, **Vite**, **TypeScript**, **Tailwind CSS**, and **Shadcn components**, this project delivers a high-performance and responsive UI.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   [Features](#features)
+-   [Technologies Used](#technologies-used)
+-   [Project Setup](#project-setup)
+-   [Environment Variables](#environment-variables)
+-   [Project Structure](#project-structure)
+-   [Usage](#usage)
+-   [License](#license)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+-   **Bank Statement Upload**: Users can upload their bank statements in supported formats.
+-   **Data Analysis**: Frontend integration with backend APIs for analyzing statement data.
+-   **Responsive Design**: Seamless experience across devices using Tailwind CSS.
+-   **Reusable Components**: Custom components via Shadcn library for consistency and modularity.
+-   **Environment Configurations**: Environment variables for secure configuration.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+-   **React** with **Vite** - Fast and optimized development experience.
+-   **TypeScript** - Strong typing for improved code quality and maintainability.
+-   **Tailwind CSS** - Utility-first CSS for responsive and customizable design.
+-   **Shadcn Components** - Reusable UI components to streamline UI consistency.
+
+## Project Setup
+
+### Prerequisites
+
+-   [Node.js](https://nodejs.org/) (v18 or later) and [npm](https://www.npmjs.com/)
+
+### Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/MeherajUlMahmmud/bank-statement-analyzer.git
+    cd bank-statement-analyzer
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Start the development server:
+    ```bash
+    npm run dev
+    ```
+
+## Environment Variables
+
+Set up your environment variables in a `.env` file at the root of the project. These might include:
+
+-   `VITE_API_BASE_URL`: The base URL for API endpoints.
+-   `VITE_AUTH_USERNAME`: The username for API authentication.
+-   `VITE_AUTH_PASSWORD`: The password for API authentication.
+
+Example `.env`:
+
+```plaintext
+VITE_API_BASE_URL=https://api.yourapp.com
+VITE_AUTH_USERNAME=basic-auth-username
+VITE_AUTH_PASSWORD=basic-auth-password
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Project Structure
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+-   **src/**: Source code for the application.
+    -   **components/**: Reusable React components.
+    -   **pages/**: Page-level components for routing.
+    -   **utils/**: Utility functions and constants.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Usage
+
+This app is designed to be used as the frontend interface of the Bank Statement Analyzer. To use the full functionality, ensure it’s connected to the respective backend service.
+
+1. Launch the app:
+
+    ```bash
+    npm run dev
+    ```
+
+2. Open your browser and navigate to [http://localhost:5173](http://localhost:5173).
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
