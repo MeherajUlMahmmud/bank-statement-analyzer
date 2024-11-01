@@ -9,6 +9,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        destructive: {
+          DEFAULT: '#EF4444', // Red-500 (unchanged)
+          foreground: '#FFFFFF',
+        },
+        warning: {
+          DEFAULT: '#F59E0B', // Amber-500 (unchanged)
+          foreground: '#78350F', // Amber-900
+        },
+        success: {
+          DEFAULT: '#10B981', // Green-500 (unchanged)
+          foreground: '#FFFFFF',
+        },
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -47,6 +59,19 @@ module.exports = {
           800: '#1f2937',
           900: '#111827',
           950: '#030712',
+        },
+        red: {
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#ef4444',
+          600: '#dc2626',
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
+          950: '#450a0a',
         },
       },
       fontFamily: {

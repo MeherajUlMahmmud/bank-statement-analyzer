@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BarChart, CheckCircle, FileText, PieChart, Shield, Zap } from 'lucide-react'
+import { ArrowRight, BarChart, CheckCircle, FileText, PieChart, Shield, Zap } from 'lucide-react'
 
 export default function HomePage() {
 	return (
@@ -19,7 +19,7 @@ export default function HomePage() {
 							</p>
 							<Link to="/upload">
 								<Button size="lg" className="bg-white text-primary-600 hover:bg-primary-50">
-									Get Started
+									Get Started <ArrowRight className="w-4 h-4 ml-2" />
 								</Button>
 							</Link>
 						</div>
@@ -37,7 +37,7 @@ export default function HomePage() {
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 						{[
 							{ icon: FileText, title: "PDF Parsing", description: "Effortlessly extract data from various bank statement formats" },
-							{ icon: PieChart, title: "Expense Categorization", description: "Automatically categorize your expenses for better insights" },
+							{ icon: PieChart, title: "Transaction Categorization", description: "Automatically categorize your expenses for better insights" },
 							{ icon: BarChart, title: "Trend Analysis", description: "Visualize your spending patterns over time" },
 							{ icon: Shield, title: "Bank-Level Security", description: "Your data is protected with state-of-the-art encryption" },
 							{ icon: Zap, title: "Fast Processing", description: "Get your analysis results in seconds, not hours" },
