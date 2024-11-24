@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { statementRepository } from '@/repository/statement'
 import { toast } from '@/hooks/use-toast'
-import { FileText, Upload, ChevronRight, Download, Loader2 } from 'lucide-react'
+import {FileText, Upload, ChevronRight, Download, Loader2, X} from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Document, Page, pdfjs } from 'react-pdf'
 
@@ -236,9 +236,22 @@ export default function FileUpload() {
 									</div>
 								</div>
 								{file && (
-									<p className="mt-2 text-sm text-gray-600">
-										Selected file: {file.name}
-									</p>
+									<div className="p-3 border rounded-lg bg-gray-50 relative">
+										<Button
+											variant="ghost"
+											size="icon"
+											className="absolute right-1 top-1 h-6 w-6"
+											onClick={() => setFile(null)}
+										>
+											<X className="h-4 w-4"/>
+										</Button>
+										<h4 className="font-medium text-sm text-gray-700 truncate pr-6">
+											{file.name}
+										</h4>
+										<p className="text-xs text-gray-500">
+											Size: {(file.size / 1024).toFixed(2)} KB
+										</p>
+									</div>
 								)}
 							</div>
 							<Button
@@ -248,12 +261,12 @@ export default function FileUpload() {
 							>
 								{isUploading ? (
 									<>
-										<Upload className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+										<Upload className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"/>
 										Uploading...
 									</>
 								) : (
 									<>
-										<Upload className="-ml-1 mr-3 h-5 w-5 text-white" />
+										<Upload className="-ml-1 mr-3 h-5 w-5 text-white"/>
 										Upload and Analyze
 									</>
 								)}
