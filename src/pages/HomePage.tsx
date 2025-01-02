@@ -5,7 +5,7 @@ import { ArrowRight, BarChart, CheckCircle, FileText, PieChart, Shield, Zap } fr
 
 export default function HomePage() {
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100">
+		<div className="py-16">
 			{/* Hero Section */}
 			<header className="bg-primary-600 text-white">
 				<div className="container mx-auto px-6 py-16">

@@ -3,7 +3,7 @@ import { Users, Lightbulb, Target, CheckCircle, Shield, Zap, HeadphonesIcon } fr
 
 export default function AboutUsPage() {
 	return (
-		<div className="bg-gradient-to-br from-primary-50 to-primary-100 py-16">
+		<div className="py-16">
 			<div className="container mx-auto px-6">
 				<h1 className="text-4xl font-bold text-center mb-8">About Us</h1>
 				<div className="max-w-3xl mx-auto text-lg text-gray-700 mb-12">

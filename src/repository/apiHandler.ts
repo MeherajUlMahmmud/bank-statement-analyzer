@@ -6,7 +6,7 @@ export const sendGetRequest = (url: string) => {
 		method: "GET",
 		url: ApiRoutes.BASE_URL + url,
 		headers: {
-			"Content-Type": "multipart/form-data",
+			"Content-Type": "application/json",
 			Authorization: `Basic ${btoa(
 				ApiAuth.authUsername + ":" + ApiAuth.authPassword
 			)}`,

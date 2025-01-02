@@ -1,10 +1,10 @@
-import React, { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, Phone, MapPin, Loader2 } from 'lucide-react'
-import { toast } from "@/hooks/use-toast"
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 interface ContactData {
 	name: string;
@@ -22,13 +22,15 @@ export default function ContactUsPage() {
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const handleChangeData = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	const handleChangeData = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
 		const { name, value } = e.target;
-		setContactData(prevData => ({
+		setContactData((prevData) => ({
 			...prevData,
-			[name]: value
+			[name]: value,
 		}));
-	}
+	};
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -36,14 +38,15 @@ export default function ContactUsPage() {
 
 		try {
 			// Simulate API call
-			await new Promise(resolve => setTimeout(resolve, 2000));
+			await new Promise((resolve) => setTimeout(resolve, 2000));
 
 			// Handle form submission
-			console.log('Form submitted', contactData);
+			console.log("Form submitted", contactData);
 
 			toast({
 				title: "Message Sent",
-				description: "We've received your message and will get back to you soon.",
+				description:
+					"We've received your message and will get back to you soon.",
 			});
 
 			// Reset form
@@ -56,23 +59,22 @@ export default function ContactUsPage() {
 		} catch (error) {
 			toast({
 				title: "Error",
-				description: "There was a problem sending your message. Please try again.",
+				description:
+					"There was a problem sending your message. Please try again.",
 				variant: "destructive",
 			});
 		} finally {
 			setIsSubmitting(false);
 		}
-	}
+	};
 
 	return (
-		<div className="bg-gradient-to-br from-primary-50 to-primary-100 py-16">
+		<div className="py-16">
 			<div className="container mx-auto px-6">
-				<h1
-					className="text-4xl font-bold text-center mb-8"
-				>
+				<h1 className="text-4xl font-bold text-center mb-8">
 					Contact Us
 				</h1>
-				<div className="max-w-4xl mx-auto">
+				<div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 						<div>
 							<form onSubmit={handleSubmit} className="space-y-4">
@@ -82,6 +84,7 @@ export default function ContactUsPage() {
 									value={contactData.name}
 									onChange={handleChangeData}
 									placeholder="Your Name"
+									className="bg-gray-100"
 									required
 								/>
 								<Input
@@ -90,6 +93,7 @@ export default function ContactUsPage() {
 									value={contactData.email}
 									onChange={handleChangeData}
 									placeholder="Your Email"
+									className="bg-gray-100"
 									required
 								/>
 								<Input
@@ -98,6 +102,7 @@ export default function ContactUsPage() {
 									value={contactData.subject}
 									onChange={handleChangeData}
 									placeholder="Subject"
+									className="bg-gray-100"
 									required
 								/>
 								<Textarea
@@ -105,54 +110,67 @@ export default function ContactUsPage() {
 									value={contactData.message}
 									onChange={handleChangeData}
 									placeholder="Your Message"
-									className="bg-white"
+									className="bg-gray-100"
+									rows={3}
 									required
 								/>
-								<Button type="submit" className="w-full bg-primary-700 text-white" disabled={isSubmitting}>
+								<Button
+									type="submit"
+									className="w-full"
+									disabled={isSubmitting}
+								>
 									{isSubmitting ? (
 										<>
 											<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 											Sending...
 										</>
 									) : (
-										'Send Message'
+										"Send Message"
 									)}
 								</Button>
 							</form>
 						</div>
 						<div>
-							<Card className="p-2">
+							<Card className="p-2 bg-gray-50">
 								<CardHeader>
-									<CardTitle className="flex items-center">
+									<CardTitle className="flex items-center text-primary-700">
 										<Mail className="mr-2" /> Email Us
 									</CardTitle>
 								</CardHeader>
 								<CardContent>
-									<a href="mailto:support@bankstatementanalyzer.com" className="text-primary-600 hover:underline">
+									<a
+										href="mailto:support@bankstatementanalyzer.com"
+										className="text-primary-600 hover:underline"
+									>
 										support@bankstatementanalyzer.com
 									</a>
 								</CardContent>
 
 								<CardHeader>
-									<CardTitle className="flex items-center">
+									<CardTitle className="flex items-center text-primary-700">
 										<Phone className="mr-2" /> Call Us
 									</CardTitle>
 								</CardHeader>
 								<CardContent>
-									<a href="tel:+1234567890" className="text-primary-600 hover:underline">
+									<a
+										href="tel:+1234567890"
+										className="text-primary-600 hover:underline"
+									>
 										+1 (234) 567-890
 									</a>
 								</CardContent>
 
 								<CardHeader>
-									<CardTitle className="flex items-center">
+									<CardTitle className="flex items-center text-primary-700">
 										<MapPin className="mr-2" /> Visit Us
 									</CardTitle>
 								</CardHeader>
 								<CardContent>
 									<address className="not-italic">
-										123 Financial Street<br />
-										Analyticsville, AN 12345<br />
+										123 Financial Street
+										<br />
+										Analyticsville, AN 12345
+										<br />
 										United States
 									</address>
 								</CardContent>
@@ -162,5 +180,5 @@ export default function ContactUsPage() {
 				</div>
 			</div>
 		</div>
-	)
+	);
 }
