@@ -128,6 +128,16 @@ export default function FileUpload() {
 			return
 		}
 
+		// check file size
+		if (file.size > 5 * 1024 * 1024) {
+			toast({
+				title: "Error",
+				description: "File size exceeds the limit of 5MB.",
+				variant: "destructive",
+			})
+			return
+		}
+
 		setIsUploading(true)
 		try {
 			const response = await statementRepository.uploadPdf(file, selectedBank);
@@ -186,96 +196,95 @@ export default function FileUpload() {
 	};
 
 	return (
-		<div className="min-h-screen flex flex-col justify-center items-center p-6 space-y-6">
-			<div className="max-w-4xl w-full bg-white rounded-lg shadow-lg overflow-hidden">
-				<div className="md:flex">
-					<div className="w-full p-8 text-gray-800">
-						<h3 className="text-2xl font-semibold mb-4">Upload Your Statement</h3>
-						<form onSubmit={handleSubmit} className="space-y-6">
-							<div>
-								<Label htmlFor="bank-select" className="text-sm font-medium">Select Your Bank</Label>
-								<Select onValueChange={setSelectedBank} value={selectedBank}>
-									<SelectTrigger className="w-full mt-1">
-										<SelectValue placeholder="Choose a bank" />
-									</SelectTrigger>
-									<SelectContent className="bg-white">
-										{banks && banks.map((bank) => (
-											<SelectItem key={bank.value} value={bank.value}>
-												{bank.name}
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
-							</div>
-							<div>
-								<Label htmlFor="file-upload" className="text-sm font-medium">Upload PDF Statement</Label>
-								<div
-									className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
-									onDrop={handleFileDrop}
-									onDragOver={handleDragOver}
-								>
-									<div className="space-y-1 text-center">
-										<FileText className="mx-auto h-12 w-12 text-gray-400" />
-										<div className="flex text-sm text-gray-600">
-											<label
-												htmlFor="file-upload"
-												className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
-											>
-												<span>Upload a file</span>
-												<Input
-													id="file-upload"
-													type="file"
-													accept=".pdf"
-													onChange={handleFileChange}
-													className="sr-only"
-												/>
-											</label>
-											<p className="pl-1">or drag and drop</p>
-										</div>
-										<p className="text-xs text-gray-500">PDF up to 10MB</p>
-									</div>
-								</div>
-								<div className='mt-2 text-sm text-gray-500'>
-									{file && (
-										<div className="p-3 border rounded-lg bg-gray-50 relative">
-											<Button
-												variant="ghost"
-												size="icon"
-												className="absolute right-1 top-1 h-6 w-6"
-												onClick={() => setFile(null)}
-											>
-												<X className="h-4 w-4" />
-											</Button>
-											<h4 className="font-medium text-sm text-gray-700 truncate pr-6">
-												{file.name}
-											</h4>
-											<p className="text-xs text-gray-500">
-												Size: {(file.size / 1024).toFixed(2)} KB
-											</p>
-										</div>
-									)}
-								</div>
-							</div>
-							<Button
-								variant={"outline"}
-								type="submit"
-								disabled={!file || !selectedBank || isUploading}
-								className="w-full flex justify-center py-2 px-4"
+		<div className="p-16 flex flex-col justify-center items-center space-y-6">
+			<div className="w-full bg-white rounded-lg shadow-lg border">
+				<div className="w-full p-8 text-gray-800">
+					<h3 className="text-2xl font-semibold mb-4">Upload Your Statement</h3>
+					<form onSubmit={handleSubmit} className="space-y-6">
+						<div>
+							<Label htmlFor="bank-select" className="text-sm font-medium">Select Your Bank</Label>
+							<Select onValueChange={setSelectedBank} value={selectedBank}>
+								<SelectTrigger className="w-full mt-1">
+									<SelectValue placeholder="Choose a bank" />
+								</SelectTrigger>
+								<SelectContent className="bg-white">
+									{banks && banks.map((bank) => (
+										<SelectItem key={bank.value} value={bank.value}>
+											{bank.name}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</div>
+						<div>
+							<Label htmlFor="file-upload" className="text-sm font-medium">Upload PDF Statement</Label>
+							<div
+								className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
+								onDrop={handleFileDrop}
+								onDragOver={handleDragOver}
 							>
-								{isUploading ? (
-									<>
-										<Loader className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
-										Uploading...
-									</>
-								) : (
-									<>
-										<Upload className="-ml-1 mr-3 h-5 w-5 text-white" />
-										Upload and Analyze
-									</>
+								<div className="space-y-1 text-center">
+									<FileText className="mx-auto h-12 w-12 text-gray-400" />
+									<div className="flex text-sm text-gray-600">
+										<label
+											htmlFor="file-upload"
+											className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
+										>
+											<span>Select a file</span>
+											<Input
+												id="file-upload"
+												type="file"
+												accept="application/pdf"
+												multiple={false}
+												onChange={handleFileChange}
+												className="sr-only"
+											/>
+										</label>
+										<p className="pl-1">or drag and drop</p>
+									</div>
+									<p className="text-xs text-gray-500">PDF up to 5MB</p>
+								</div>
+							</div>
+							<div className='mt-2 text-sm text-gray-500'>
+								{file && (
+									<div className="p-3 border rounded-lg bg-gray-50 relative">
+										<Button
+											variant="ghost"
+											size="icon"
+											className="absolute right-1 top-1 h-6 w-6"
+											onClick={() => setFile(null)}
+										>
+											<X className="h-4 w-4" />
+										</Button>
+										<h4 className="font-medium text-sm text-gray-700 truncate pr-6">
+											{file.name}
+										</h4>
+										<p className="text-xs text-gray-500">
+											Size: {(file.size / 1024).toFixed(2)} KB
+										</p>
+									</div>
 								)}
-							</Button>
-						</form>
-					</div>
+							</div>
+						</div>
+						<Button
+							variant={"outline"}
+							type="submit"
+							disabled={!file || !selectedBank || isUploading}
+							className="w-full flex justify-center py-2 px-4"
+						>
+							{isUploading ? (
+								<>
+									<Loader className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+									Uploading...
+								</>
+							) : (
+								<>
+									<Upload className="-ml-1 mr-3 h-5 w-5 text-white" />
+									Upload and Analyze
+								</>
+							)}
+						</Button>
+					</form>
 				</div>
 			</div>
 

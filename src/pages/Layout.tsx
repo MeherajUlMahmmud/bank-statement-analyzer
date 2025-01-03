@@ -35,7 +35,7 @@ export default function Layout({ children }: LayoutProps) {
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
             <Navbar location={location} />
-            <main className="max-w-[1250px] mx-auto flex-grow">
+            <main className="max-w-[1250px] w-full mx-auto">
                 {children}
             </main>
             <Footer />
