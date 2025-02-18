@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ApiAuth, ApiRoutes } from "../utils/constants";
+import { ApiAuth, ApiRoutes } from "@/configs/constants";
 
 export const sendGetRequest = (url: string) => {
 	return axios({

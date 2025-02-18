@@ -1,4 +1,4 @@
-import { AppUrls } from '@/utils/constants'
+import { AppUrls } from '@/configs/constants'
 import { FacebookIcon, GithubIcon, InstagramIcon, TwitterIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 

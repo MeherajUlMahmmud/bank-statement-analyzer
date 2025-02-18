@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppUrls } from '../../utils/constants';
+import { AppUrls } from '@/configs/constants';
 import { Menu, X } from 'lucide-react';
+import { Button } from '../ui/button';
 
 interface NavbarProps {
 	location: any;
@@ -35,12 +36,14 @@ export default function Navbar({ location }: NavbarProps) {
 						<Link to={AppUrls.contactRoute} className={linkClasses(AppUrls.contactRoute)}>
 							Contact
 						</Link>
-						<Link to={AppUrls.fileUploadRoute} className={`px-3 py-2 rounded-md bg-primary-600 text-white`}>
-							Analyze Statement
-						</Link>
+						<Button asChild>
+							<Link to={AppUrls.fileUploadRoute} className={`px-3 py-2 rounded-md`}>
+								Analyze Statement
+							</Link>
+						</Button>
 					</div>
 					<button
-						className="md:hidden text-gray-600 hover:text-primary-600 focus:outline-none"
+						className="md:hidden hover:text-primary-600 focus:outline-none"
 						onClick={toggleMenu}
 					>
 						{isMenuOpen ? <X size={24} /> : <Menu size={24} />}

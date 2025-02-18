@@ -1,3 +1,95 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	/* Color Palette */
+	--white: #ffffff;
+	--platinum: #e5e5e5;
+	--black: #000000;
+	--orange: #fca311;
+	--oxford: #14213d;
+
+	/* General Theme */
+	--background: var(--white);
+	--foreground: var(--black);
+	--primary: var(--oxford);
+	--primary-foreground: var(--white);
+	--secondary: var(--platinum);
+	--secondary-foreground: var(--oxford);
+	--destructive: #ef4444;
+	--destructive-foreground: var(--white);
+	--muted: var(--platinum);
+	--muted-foreground: #999999;
+	/* Fixed invalid black-300 reference */
+	--accent: var(--orange);
+	--accent-foreground: var(--oxford);
+	--popover: var(--white);
+	--popover-foreground: var(--oxford);
+	--card: var(--white);
+	--card-foreground: var(--oxford);
+	--border: var(--platinum);
+	--input: var(--platinum);
+	--ring: var(--orange);
+
+	--radius: 0.5rem;
+
+	--sidebar-background: 0 0% 98%;
+	--sidebar-foreground: 240 5.3% 26.1%;
+	--sidebar-primary: 240 5.9% 10%;
+	--sidebar-primary-foreground: 0 0% 98%;
+	--sidebar-accent: 240 4.8% 95.9%;
+	--sidebar-accent-foreground: 240 5.9% 10%;
+	--sidebar-border: 220 13% 91%;
+	--sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+.dark {
+	/* General Theme */
+	--background: var(--oxford);
+	--foreground: var(--white);
+	--primary: var(--orange);
+	--primary-foreground: var(--oxford);
+	--secondary: #1f2937;
+	/* Darker gray for secondary items */
+	--secondary-foreground: var(--white);
+	--destructive: #7f1d1d;
+	--destructive-foreground: var(--white);
+	--muted: #2d3748;
+	/* Subtle muted color */
+	--muted-foreground: var(--platinum);
+	--accent: var(--platinum);
+	--accent-foreground: var(--oxford);
+	--popover: #2c2c2c;
+	--popover-foreground: var(--white);
+	--card: var(--oxford);
+	--card-foreground: var(--white);
+	--border: #3f3f46;
+	--input: #3f3f46;
+	--ring: var(--orange);
+
+	--sidebar-background: 240 5.9% 10%;
+	--sidebar-foreground: 240 4.8% 95.9%;
+	--sidebar-primary: 224.3 76.3% 48%;
+	--sidebar-primary-foreground: 0 0% 100%;
+	--sidebar-accent: 240 3.7% 15.9%;
+	--sidebar-accent-foreground: 240 4.8% 95.9%;
+	--sidebar-border: 240 3.7% 15.9%;
+	--sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+:root {
+	--scrollbar-track: hsl(var(--background));
+	--scrollbar-thumb: hsl(var(--muted-foreground) / 0.5);
+}
+
+.dark {
+	--scrollbar-track: hsl(var(--background));
+	--scrollbar-thumb: hsl(var(--muted-foreground) / 0.5);
+}

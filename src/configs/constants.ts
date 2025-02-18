@@ -1,9 +1,11 @@
+import heroImg from "../assets/images/hero.jpg";
+
 // Application Constants
 export class AppConstants {
 	static appName = "Bank Statement Analyzer";
 
-	static genericErrorMessage =
-		"Something went wrong. Please try again later.";
+	static MAX_FILES = 10;
+	static MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 }
 
 // API Routes
@@ -14,19 +16,8 @@ export class ApiRoutes {
 	static PDF_TO_CSV_URL = "/pdf-to-csv/convert";
 }
 
-export class ApiAuth {
-	static authUsername = import.meta.env.VITE_AUTH_USERNAME;
-	static authPassword = import.meta.env.VITE_AUTH_PASSWORD;
-}
-
 // App URLs
 export class AppUrls {
-	static loginRoute = "/auth/login";
-	static signUpRoute = "/auth/sign-up";
-	static resetPasswordRoute = "/auth/reset-password";
-	static newPasswordRoute = "/auth/new-password";
-	static logoutRoute = "/auth/logout";
-
 	static homeRoute = "/";
 	static fileUploadRoute = "/upload";
 
@@ -36,7 +27,17 @@ export class AppUrls {
 	static errorRoute = "/error";
 }
 
+export class ApiAuth {
+	static authUsername = import.meta.env.VITE_AUTH_USERNAME;
+	static authPassword = import.meta.env.VITE_AUTH_PASSWORD;
+}
+
 // Assets
 export class Assets {
-	static logo = "/src/assets/logo.png";
+	static heroImg = heroImg;
+}
+
+export class Messages {
+	static GENERIC_SUCCESS_MESSAGE = "Process completed successfully";
+	static GENERIC_ERROR_MESSAGE = "Failed to complete the process";
 }

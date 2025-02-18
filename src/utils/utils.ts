@@ -1,6 +1,3 @@
-import { AppUrls } from "./constants";
-import { deleteLocalStorage } from "./persistLocalStorage";
-
 export class Helper {
 	static capitalize = (str: string) => {
 		return str.charAt(0).toUpperCase() + str.slice(1);
@@ -10,6 +7,11 @@ export class Helper {
 		return URL.createObjectURL(file); // Create a local URL for the file
 	};
 
+	static NUMBER_FORMATTER = new Intl.NumberFormat("en-US", {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+	});
+
 	static getRandomColor = () => {
 		const letters = "0123456789ABCDEF";
 		let color = "#";
@@ -17,6 +19,33 @@ export class Helper {
 			color += letters[Math.floor(Math.random() * 16)];
 		}
 		return color;
+	};
+
+	static getStatusId = (statusName: string, adviceStatusList: any[]) => {
+		const status = adviceStatusList.find(
+			(item) => item.statusName === statusName
+		);
+		return status ? status.statusId : null;
+	};
+
+	static getCategoryId = (
+		categoryName: string,
+		adviceCategoryList: any[]
+	) => {
+		const category = adviceCategoryList.find(
+			(item) => item.categoryName === categoryName
+		);
+		return category ? category.categoryId : null;
+	};
+
+	static getCategoryName = (
+		categoryName: string,
+		adviceCategoryList: any[]
+	) => {
+		const category = adviceCategoryList.find(
+			(item) => item.categoryName === categoryName
+		);
+		return category ? category.categoryName : null;
 	};
 
 	static commaSeparated = (str: string) => str.toLocaleString();
@@ -61,6 +90,17 @@ export class Helper {
 		} else {
 			return date.toLocaleString("en-US", options as any);
 		}
+	};
+
+	static formatDate = (dateTime: string) => {
+		// July 16, 2023
+		const date = new Date(dateTime);
+		const options = {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		};
+		return date.toLocaleString("en-US", options as any);
 	};
 
 	static formatDateTime = (dateTime: string) => {
@@ -184,10 +224,7 @@ export class Helper {
 		return false;
 	};
 
-	static logout = (navigate: any) => {
-		deleteLocalStorage("user");
-		deleteLocalStorage("tokens");
-		deleteLocalStorage("cart");
-		navigate(AppUrls.loginRoute);
+	static isNotNullOrEmpty = (value: string | null | undefined): boolean => {
+		return value !== "" && value !== null && value !== undefined;
 	};
 }

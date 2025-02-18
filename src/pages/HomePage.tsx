@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, BarChart, CheckCircle, FileText, PieChart, Shield, Zap } from 'lucide-react'
+import { Assets } from '@/configs/constants'
 
 export default function HomePage() {
 	return (
 		<div className="py-16">
 			{/* Hero Section */}
-			<header className="bg-primary-600 text-white">
+			<header className="bg-primary-600">
 				<div className="container mx-auto px-6 py-16">
 					<div className="flex flex-col md:flex-row items-center justify-between">
 						<div className="md:w-1/2 mb-8 md:mb-0">
@@ -17,11 +18,11 @@ export default function HomePage() {
 							<p className="text-xl mb-8">
 								Our advanced AI-powered analyzer turns your financial data into actionable insights, helping you make smarter decisions.
 							</p>
-							<Link to="/upload">
-								<Button size="lg" className="bg-white text-primary-600 hover:bg-primary-50">
+							<Button asChild>
+								<Link to="/upload">
 									Get Started <ArrowRight className="w-4 h-4 ml-2" />
-								</Button>
-							</Link>
+								</Link>
+							</Button>
 						</div>
 						<div className="md:w-1/2">
 							<img src="https://precisa.in/wp-content/uploads/2021/04/BSA-Chart.jpg?height=400&width=600" alt="Bank Statement Analysis" className="rounded-lg shadow-2xl" />
@@ -58,12 +59,12 @@ export default function HomePage() {
 			</section>
 
 			{/* How It Works Section */}
-			<section className="bg-white py-20">
+			<section className="py-20">
 				<div className="container mx-auto px-6">
 					<h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
 					<div className="flex flex-col md:flex-row items-center justify-between">
 						<div className="md:w-1/2 mb-8 md:mb-0">
-							<img src="https://precisa.in/wp-content/uploads/2021/04/BSA-Chart.jpg?height=400&width=600" alt="How It Works" className="rounded-lg shadow-xl" />
+							<img src={Assets.heroImg} alt="How It Works" className="rounded-lg shadow-xl" />
 						</div>
 						<div className="md:w-1/2 md:pl-12">
 							<ol className="space-y-6">
@@ -74,7 +75,7 @@ export default function HomePage() {
 									"Gain insights and make informed decisions"
 								].map((step, index) => (
 									<li key={index} className="flex items-center">
-										<span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-primary-600 text-white rounded-full mr-4">
+										<span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full mr-4">
 											{index + 1}
 										</span>
 										<span className="text-lg">{step}</span>
@@ -111,15 +112,17 @@ export default function HomePage() {
 			</section>
 
 			{/* CTA Section */}
-			<section className="bg-primary-600 text-white py-20">
+			<section className="bg-primary-600 py-20">
 				<div className="container mx-auto px-6 text-center">
 					<h2 className="text-3xl font-bold mb-4">Ready to Gain Financial Clarity?</h2>
 					<p className="text-xl mb-8">Start analyzing your bank statements today and unlock valuable insights.</p>
-					<Link to="/upload">
-						<Button size="lg" className="bg-white text-primary-600 hover:bg-primary-50">
+
+					<Button asChild>
+						<Link to="/upload">
 							Analyze Your Statement Now
-						</Button>
-					</Link>
+						</Link>
+					</Button>
+
 				</div>
 			</section>
 		</div>

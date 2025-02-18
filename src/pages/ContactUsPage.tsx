@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
+import { Mail, Phone, MapPin, Loader2, Send } from "lucide-react";
+import { useToast } from "@/hooks/use-toast"
+import { motion } from "framer-motion"
 
 interface ContactData {
 	name: string;
@@ -21,6 +21,7 @@ export default function ContactUsPage() {
 		message: "",
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const { toast } = useToast()
 
 	const handleChangeData = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -69,14 +70,56 @@ export default function ContactUsPage() {
 	};
 
 	return (
-		<div className="py-16">
-			<div className="container mx-auto px-6">
-				<h1 className="text-4xl font-bold text-center mb-8">
-					Contact Us
-				</h1>
-				<div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-						<div>
+		<div className=" py-16">
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+				<motion.h1
+					className="text-4xl font-bold text-center mb-8 text-primary-800"
+					initial={{ opacity: 0, y: -20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+				>
+					Get in Touch
+				</motion.h1>
+				<motion.div
+					className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden"
+					initial={{ opacity: 0, scale: 0.9 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+				>
+					<div className="grid grid-cols-1 md:grid-cols-2">
+						<div className="p-8 bg-primary-600">
+							<h2 className="text-2xl font-semibold text-white mb-6">Contact Information</h2>
+							<div className="space-y-6">
+								<div className="flex items-center space-x-4 text-white">
+									<Mail className="h-6 w-6" />
+									<a href="mailto:support@bankstatementanalyzer.com" className="hover:underline">
+										support@bankstatementanalyzer.com
+									</a>
+								</div>
+								<div className="flex items-center space-x-4 text-white">
+									<Phone className="h-6 w-6" />
+									<a href="tel:+1234567890" className="hover:underline">
+										+1 (234) 567-890
+									</a>
+								</div>
+								<div className="flex items-center space-x-4 text-white">
+									<MapPin className="h-6 w-6" />
+									<address className="not-italic">
+										123 Financial Street
+										<br />
+										Analyticsville, AN 12345
+										<br />
+										United States
+									</address>
+								</div>
+							</div>
+							<div className="mt-12">
+								<h3 className="text-xl font-semibold text-white mb-4">Follow Us</h3>
+								<div className="flex space-x-4">{/* Add social media icons here */}</div>
+							</div>
+						</div>
+						<div className="p-8">
+							<h2 className="text-2xl font-semibold text-primary-800 mb-6">Send us a Message</h2>
 							<form onSubmit={handleSubmit} className="space-y-4">
 								<Input
 									type="text"
@@ -84,7 +127,7 @@ export default function ContactUsPage() {
 									value={contactData.name}
 									onChange={handleChangeData}
 									placeholder="Your Name"
-									className="bg-gray-100"
+									className="bg-primary-50"
 									required
 								/>
 								<Input
@@ -93,7 +136,7 @@ export default function ContactUsPage() {
 									value={contactData.email}
 									onChange={handleChangeData}
 									placeholder="Your Email"
-									className="bg-gray-100"
+									className="bg-primary-50"
 									required
 								/>
 								<Input
@@ -102,7 +145,7 @@ export default function ContactUsPage() {
 									value={contactData.subject}
 									onChange={handleChangeData}
 									placeholder="Subject"
-									className="bg-gray-100"
+									className="bg-primary-50"
 									required
 								/>
 								<Textarea
@@ -110,13 +153,13 @@ export default function ContactUsPage() {
 									value={contactData.message}
 									onChange={handleChangeData}
 									placeholder="Your Message"
-									className="bg-gray-100"
-									rows={3}
+									className="bg-primary-50"
+									rows={4}
 									required
 								/>
 								<Button
 									type="submit"
-									className="w-full"
+									className="w-full bg-primary-600 hover:bg-primary-700 text-white"
 									disabled={isSubmitting}
 								>
 									{isSubmitting ? (
@@ -125,59 +168,16 @@ export default function ContactUsPage() {
 											Sending...
 										</>
 									) : (
-										"Send Message"
+										<>
+											<Send className="mr-2 h-4 w-4" />
+											Send Message
+										</>
 									)}
 								</Button>
 							</form>
 						</div>
-						<div>
-							<Card className="p-2 bg-gray-50">
-								<CardHeader>
-									<CardTitle className="flex items-center text-primary-700">
-										<Mail className="mr-2" /> Email Us
-									</CardTitle>
-								</CardHeader>
-								<CardContent>
-									<a
-										href="mailto:support@bankstatementanalyzer.com"
-										className="text-primary-600 hover:underline"
-									>
-										support@bankstatementanalyzer.com
-									</a>
-								</CardContent>
-
-								<CardHeader>
-									<CardTitle className="flex items-center text-primary-700">
-										<Phone className="mr-2" /> Call Us
-									</CardTitle>
-								</CardHeader>
-								<CardContent>
-									<a
-										href="tel:+1234567890"
-										className="text-primary-600 hover:underline"
-									>
-										+1 (234) 567-890
-									</a>
-								</CardContent>
-
-								<CardHeader>
-									<CardTitle className="flex items-center text-primary-700">
-										<MapPin className="mr-2" /> Visit Us
-									</CardTitle>
-								</CardHeader>
-								<CardContent>
-									<address className="not-italic">
-										123 Financial Street
-										<br />
-										Analyticsville, AN 12345
-										<br />
-										United States
-									</address>
-								</CardContent>
-							</Card>
-						</div>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</div>
 	);
