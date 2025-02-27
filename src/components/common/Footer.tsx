@@ -46,7 +46,8 @@ const Footer = () => {
 					</div>
 				</div>
 				<div className="mt-8 pt-8 border-t border-gray-700 text-center">
-					<p>&copy; 2023 Bank Statement Analyzer. All rights reserved.</p>
+					<p>&copy; 2024 Bank Statement Analyzer. All rights reserved.</p>
+					<p>Powered by <a href="https://bengal-connect.vercel.app" target="_blank" className="text-primary-300 hover:underline">Bengal Connect</a></p>
 				</div>
 			</div>
 		</footer>
